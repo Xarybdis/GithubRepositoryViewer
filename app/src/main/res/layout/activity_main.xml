@@ -31,11 +31,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:text="User Name:"
+                    android:text="Repository Name:"
                     android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/repo_name"
+                    android:text="allegro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="RepoName"
