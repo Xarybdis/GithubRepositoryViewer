@@ -98,12 +98,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ExampleModel>> call, Response<List<ExampleModel>> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), response.code(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "There is no such a name. Please check the name of repo.",
+                            Toast.LENGTH_LONG).show();
+                    Log.d("TAG","Bad response :"+String.valueOf(response.code()));
                     System.out.println("Here" + response.code());
                     return;
                 } else if (response == null) {
-                    Toast.makeText(getApplicationContext(), "No one is there!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Null returns", Toast.LENGTH_LONG).show();
                 } else {
+
+
                     List<ExampleModel> exampleModelRes = response.body();
                     for (ExampleModel items : exampleModelRes) {
 
@@ -112,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                         String repoFullName = items.getFullName();
                         String repoHtml = items.getHtmlUrl();
                         repoItems.add(new RepoItem(avatarHtml, repoName, repoFullName, repoHtml));
-
+                        _Adapter.notifyDataSetChanged();
                     }
 
                 }
@@ -132,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RepoWebView.class);
         intent.putExtra("htmlUrl", pageUrl);
         startActivity(intent);
-        _Adapter.notifyAll();
+        //_Adapter.notifyAll();
     }
 
     public void clearData(ArrayList<RepoItem> repoItems, RepoAdapter _Adapter) {
